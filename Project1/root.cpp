@@ -11,9 +11,10 @@
 typedef std::string str;
 
 int main() {
+
 //Head name+
-    TCHAR NewTitle[MAX_PATH];
-    StringCchPrintf(NewTitle, MAX_PATH, TEXT("TEST: %s"), TEXT("WHAT?"));
+    TCHAR NewTitle[MAX_PATH]= TEXT("WHAT?");
+    //StringCchPrintf(NewTitle, MAX_PATH, TEXT("TEST: %s"), TEXT("WHAT?"));
     SetConsoleTitle(NewTitle);
 //Head name-
         
@@ -44,7 +45,7 @@ int main() {
     }
 //field of play-
 
-
+    snake sk;
 
 //switch+
     int i_switch;
@@ -53,14 +54,18 @@ int main() {
             i_switch = static_cast<int>(_getch());
         }
         else i_switch = 0;
-        //method "directionVector" from the class "snake"
-        std::cout << i_switch;
+
+        sk.directionVector(i_switch);    //method "directionVector" from the class "snake"
     }
 //switch-
  
 
 
     //69w/26h
+    
+    
+    //FPS
+    
 
     /*COORD c = {1,1};
     int percent = 100000;
