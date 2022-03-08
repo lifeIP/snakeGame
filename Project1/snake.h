@@ -14,25 +14,33 @@ private:
 		switch (direction)
 		{
 		case 'u'://UP
-			x--;
+			if (x > 1) {
+				x--;
+			}
 			pos_now = {y,x};
 			SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
 			std::cout << '@';
 			break;
 		case 'd'://DOWN
-			x++;
+			if (x < 26) {
+				x++;
+			}
 			pos_now = { y,x };
 			SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
 			std::cout << '@';
 			break;
 		case 'l'://LEFT
-			y--;
+			if (y > 1) {
+				y--;
+			}
 			pos_now = { y,x };
 			SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
 			std::cout << '@';
 			break;
 		case 'r'://RIGHT
-			y++;
+			if (y < 70) {
+				y++;
+			}
 			pos_now = { y,x };
 			SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
 			std::cout << '@';
