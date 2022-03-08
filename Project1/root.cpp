@@ -44,6 +44,22 @@ int main() {
     }
 //field of play-
 
+
+
+//switch+
+    int i_switch;
+    while (true) {
+        if (_getch()) {
+            i_switch = static_cast<int>(_getch());
+        }
+        else i_switch = 0;
+        //method "directionVector" from the class "snake"
+        std::cout << i_switch;
+    }
+//switch-
+ 
+
+
     //69w/26h
 
     /*COORD c = {1,1};
