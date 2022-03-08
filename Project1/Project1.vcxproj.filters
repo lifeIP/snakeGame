@@ -23,7 +23,7 @@
     <ClInclude Include="mechanic.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="gamer_platform.h">
+    <ClInclude Include="snake.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

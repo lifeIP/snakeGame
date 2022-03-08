@@ -142,8 +142,8 @@
     <ClCompile Include="root.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="gamer_platform.h" />
     <ClInclude Include="mechanic.h" />
+    <ClInclude Include="snake.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
