@@ -6,19 +6,19 @@ class snake
 private:
 	int width;
 	int height;
-	char** field;
-	int direction = 0;
-	short x = 10, y = 10;
+	bool** field;
+	short x = 10, y = 20;
 	bool endGame = false;
 	
+
 	COORD pos_now = { y,x };
-	
 	void setPosition(const char direction) {
 		switch (direction)
 		{
 		case 'u'://UP
 			if (x > 1) {
 				x--;
+				
 			}
 			else {
 				x--;
@@ -30,8 +30,9 @@ private:
 			break;
 
 		case 'd'://DOWN
-			if (x < 26) {
+			if (x < height) {
 				x++;
+				
 			}
 			else {
 				x++;
@@ -43,8 +44,9 @@ private:
 			break;
 
 		case 'l'://LEFT
-			if (y > 0) {
+			if (y > 1) {
 				y--;
+				
 			}
 			else {
 				y--;
@@ -56,8 +58,9 @@ private:
 			break;
 
 		case 'r'://RIGHT
-			if (y < 71) {
+			if (y < width+1) {
 				y++;
+				
 			}
 			else {
 				y++;
@@ -81,10 +84,30 @@ public:
 
 	void ñreate_a_field(int width_enter = 69, int height_enter = 26) {
 		width = width_enter; height = height_enter;
-		field = new char*[width];
-		/*for (int i = 0; i < width; i++) {
-			field[i] = new char[height];
-		}*/
+		
+		for (short i = 0, j = 0; i < width_enter+3; i++) {
+			COORD pos_up = { i,j };
+			SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_up);
+			std::cout << "-";
+		}
+
+		for (short i = 0, j = 1; j < height_enter+1; j++) {
+			COORD pos_left = { i,j };
+			SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_left);
+			std::cout << "|\n";
+		}
+
+		for (short i = width_enter+2, j = 1; j < height_enter+1; j++) {
+			COORD pos_right = { i,j };
+			SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_right);
+			std::cout << "|\n";
+		}
+
+		for (short i = 0, j = height_enter+1; i < width_enter+3; i++) {
+			COORD pos_down = { i,j };
+			SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_down);
+			std::cout << "-";
+		}
 	}
 
 	void directionVector(int direction) {
