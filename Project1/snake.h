@@ -1,6 +1,8 @@
 #pragma once
+#include <vector> 
+std::vector <double> part_position;
 
-// The class is implemented in order to create a multiplayer.
+
 class snake
 {
 private:
@@ -9,8 +11,7 @@ private:
 	bool** field;
 	short x = 10, y = 20;
 	bool endGame = false;
-	
-
+	char pos = 'r';
 	COORD pos_now = { y,x };
 	void setPosition(const char direction) {
 		switch (direction)
@@ -114,20 +115,21 @@ public:
 		switch (direction)
 		{
 		case 72://UP
-			setPosition('u');
+			pos = 'u';
 			break;
 		case 80://DOWN
-			setPosition('d');
+			pos = 'd';
 			break;
 		case 75://LEFT
-			setPosition('l');
+			pos = 'l';
 			break;
 		case 77://RIGHT
-			setPosition('r');
+			pos = 'r';
 			break;
 		default:
 			break;
 		}
+		setPosition(pos);
 	}
 
 };
