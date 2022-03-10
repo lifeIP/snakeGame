@@ -3,9 +3,8 @@
 
 void directionVector(int direction);
 void setPosition(const char direction);
-bool it_is_lose();
 void ñreate_a_field(int width_enter, int height_enter);
-void this_is_end();
+void is_end();
 
 std::vector <double> part_position;
 int width;
@@ -18,10 +17,22 @@ char pos = 'r';
 
 COORD pos_now = { y,x };
 
+void is_end() {
+	while(!endGame){}
+	short x = 10, y = 10;
+	pos_now = { x, y };
+	std::string st1{ "This is the end of the snake world :(" };
+	SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
+	std::cout << st1;
+	x = 0; y = height + 5;
+	pos_now = { x, y };
+	SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
+}
+
 void root_s()
 {
 	int i_switch;
-	while (!it_is_lose()) {
+	while (!endGame) {
 		if (_getch()) {
 			i_switch = static_cast<int>(_getch());
 		}
@@ -31,18 +42,12 @@ void root_s()
 	}
 }
 void root_t() {
-	while (!it_is_lose()) {
+	while (!endGame) {
 		setPosition(pos);
-		Sleep(300);
-	}
-}
-void this_is_end() {
-	short x = 10, y = 10;
-	pos_now = { x, y };
-	char s[17] = "This is the end!";
-	for (int i = 0; i < strlen(s) ; i++) {
-		x += i;
-		SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
+		if (pos == 'r' || pos == 'l') {
+			Sleep(50);
+		}
+		else Sleep(100);
 	}
 }
 
@@ -50,16 +55,24 @@ void directionVector(int direction) {
 	switch (direction)
 	{
 	case 72://UP
-		pos = 'u';
+		if (pos != 'd') {
+			pos = 'u';
+		}
 		break;
 	case 80://DOWN
-		pos = 'd';
+		if (pos != 'u') {
+			pos = 'd';
+		}
 		break;
 	case 75://LEFT
-		pos = 'l';
+		if (pos != 'r') {
+			pos = 'l';
+		}
 		break;
 	case 77://RIGHT
-		pos = 'r';
+		if (pos != 'l') {
+			pos = 'r';
+		}
 		break;
 	default:
 		break;
@@ -128,10 +141,6 @@ void setPosition(const char direction) {
 	default:
 		break;
 	}
-}
-
-bool it_is_lose() {
-	return endGame;
 }
 
 void ñreate_a_field(int width_enter = 69, int height_enter = 26) {
