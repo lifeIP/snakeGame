@@ -5,6 +5,8 @@
 #include <conio.h>
 #include <strsafe.h>
 
+#include <thread>
+
 #include "mechanic.h"
 #include "snake.h"
 
@@ -16,15 +18,11 @@ int main() {
     StringCchPrintf(NewTitle, MAX_PATH, TEXT("WHAT? %s"), TEXT("SCORE!"));
     SetConsoleTitle(NewTitle);
     //Head name-
-    snake sk;
-    sk.ñreate_a_field(50, 26);
-    int i_switch;
-    while (!sk.it_is_lose()) {
-        if (_getch()) {
-            i_switch = static_cast<int>(_getch());
-        }
-        else i_switch = 0;
 
-        sk.directionVector(i_switch);
-    }
+    ñreate_a_field(50, 26);
+    std::thread s(root_s);
+    std::thread t(root_t);
+    s.join();
+    t.join();
+    void this_is_end();
 }
