@@ -1,25 +1,33 @@
-#pragma once
-#include <vector> 
+Ôªø#pragma once
 
 void directionVector(int direction);
 void setPosition(const char direction);
-void Òreate_a_field(int width_enter, int height_enter);
+void —Åreate_a_field(int width_enter, int height_enter);
 void is_end();
 void render_pos();
-
+void appearanceFood();
+void setFoodPos();
 
 std::vector <short> part_position_x = { };
 std::vector <short> part_position_y = { };
 
 int width;
 int height;
-short size_snake = 15;
+short size_snake = 120;
 short x = 10, y = 20;
 bool endGame = false;
 char pos = 'r';
-
-
+bool val = false;
+short pos_x, pos_y;
 COORD pos_now = { y,x };
+
+void setFoodPos() {
+	pos_x = 1 + rand() % width - 1;
+	pos_y = 1 + rand() % height - 1;
+	pos_now = { pos_x, pos_y };
+	SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
+	std::cout << '#';
+ }
 
 void is_end() {
 	short x = 10, y = 10;
@@ -176,7 +184,7 @@ void setPosition(const char direction) {
 	}
 }
 
-void Òreate_a_field(int width_enter = 69, int height_enter = 26) {
+void —Åreate_a_field(int width_enter = 69, int height_enter = 26) {
 	width = width_enter; height = height_enter;
 
 	for (short i = 0, j = 0; i < width_enter + 3; i++) {
