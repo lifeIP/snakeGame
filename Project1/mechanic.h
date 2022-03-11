@@ -7,10 +7,11 @@ void is_end();
 void render_pos();
 void appearanceFood();
 void setFoodPos();
+void timer();
 
 std::vector <short> part_position_x = { };
 std::vector <short> part_position_y = { };
-
+char past_pos = 'r';
 int width;
 int height;
 short size_snake = 5;
@@ -70,9 +71,9 @@ void root_t() {
 	while (!endGame) {
 		setPosition(pos);
 		if (pos == 'r' || pos == 'l') {
-			Sleep(50);
+			Sleep(100);
 		}
-		else Sleep(100);
+		else Sleep(150);
 	}
 	is_end();
 }
@@ -83,25 +84,21 @@ void directionVector(int direction) {
 	case 72://UP
 		if (pos != 'd') {
 			pos = 'u';
-			Sleep(100);
 		}
 		break;
 	case 80://DOWN
 		if (pos != 'u') {
 			pos = 'd';
-			Sleep(100);
 		}
 		break;
 	case 75://LEFT
 		if (pos != 'r') {
 			pos = 'l';
-			Sleep(100);
 		}
 		break;
 	case 77://RIGHT
 		if (pos != 'l') {
 			pos = 'r';
-			Sleep(100);
 		}
 		break;
 	default:
@@ -129,16 +126,20 @@ void setPosition(const char direction) {
 		setFoodPos();
 		bs = false;
 	}
-	switch (direction)
+	char sd = direction;
+	if (direction == 'u'&& past_pos=='d'|| direction == 'd' && past_pos == 'u'|| direction == 'r' && past_pos == 'l'|| direction == 'l' && past_pos == 'r') {
+		sd = past_pos;
+	}
+	switch (sd)
 	{
 	case 'u'://UP
-		
 		if (x > 1) {
 			x--;
-
+			past_pos = 'u';
 		}
 		else {
 			x--;
+			past_pos = 'u';
 			endGame = true;
 		}
 		part_position_y.insert(part_position_y.begin(), x);
@@ -154,10 +155,11 @@ void setPosition(const char direction) {
 		
 		if (x < height) {
 			x++;
-
+			past_pos = 'd';
 		}
 		else {
 			x++;
+			past_pos = 'd';
 			endGame = true;
 		}
 		part_position_y.insert(part_position_y.begin(), x);
@@ -172,9 +174,11 @@ void setPosition(const char direction) {
 	case 'l'://LEFT
 		if (y > 1) {
 			y--;
+			past_pos = 'l';
 		}
 		else {
 			y--;
+			past_pos = 'l';
 			endGame = true;
 		}
 		part_position_y.insert(part_position_y.begin(), x);
@@ -189,10 +193,11 @@ void setPosition(const char direction) {
 	case 'r'://RIGHT
 		if (y < width + 1) {
 			y++;
-
+			past_pos = 'r';
 		}
 		else {
 			y++;
+			past_pos = 'r';
 			endGame = true;
 		}
 		part_position_y.insert(part_position_y.begin(), x);

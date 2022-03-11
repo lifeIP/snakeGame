@@ -21,7 +21,6 @@ int main() {
     StringCchPrintf(NewTitle, MAX_PATH, TEXT("WHAT? %s"), TEXT("SCORE!"));
     SetConsoleTitle(NewTitle);
     //Head name-
-
     ñreate_a_field(50, 26);
     std::thread s(root_s);
     std::thread t(root_t);
