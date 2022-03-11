@@ -21,14 +21,6 @@ bool val = false;
 short pos_x, pos_y;
 COORD pos_now = { y,x };
 
-void setFoodPos() {
-	pos_x = 1 + rand() % width - 1;
-	pos_y = 1 + rand() % height - 1;
-	pos_now = { pos_x, pos_y };
-	SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
-	std::cout << '#';
- }
-
 void is_end() {
 	short x = 10, y = 10;
 	pos_now = { x, y };
@@ -60,12 +52,17 @@ void render_pos() {
 		iy = part_position_y.size() - 1;
 		x = part_position_x[ix];
 		y = part_position_y[iy];
-		pos_now = { x, y };
-		SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
-		std::cout << ' ';
-		part_position_x.pop_back();
-		part_position_y.pop_back();
-
+		if (x == pos_x && y == pos_y) {
+			part_position_x.pop_back();
+			part_position_y.pop_back();
+		}
+		else {
+			pos_now = { x, y };
+			SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
+			std::cout << ' ';
+			part_position_x.pop_back();
+			part_position_y.pop_back();
+		}
 	}
 }
 
@@ -108,7 +105,26 @@ void directionVector(int direction) {
 	}
 }
 
+void setFoodPos() {
+	pos_x = rand() % (width)+2;
+	pos_y = rand() % (height)+1;
+	pos_now = { pos_x, pos_y };
+	SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
+	std::cout << '#';
+}
+
+void appearanceFood() {
+	if (y == pos_x && x == pos_y) {
+		size_snake++;
+		setFoodPos();
+	}
+}
+bool bs = true;
 void setPosition(const char direction) {
+	if (bs == true) {
+		setFoodPos();
+		bs = false;
+	}
 	switch (direction)
 	{
 	case 'u'://UP
@@ -126,6 +142,7 @@ void setPosition(const char direction) {
 		pos_now = { y,x };
 		SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
 		std::cout << '@';
+		appearanceFood();
 		break;
 
 	case 'd'://DOWN
@@ -143,6 +160,7 @@ void setPosition(const char direction) {
 		pos_now = { y,x };
 		SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
 		std::cout << '@';
+		appearanceFood();
 		break;
 
 	case 'l'://LEFT
@@ -160,6 +178,7 @@ void setPosition(const char direction) {
 		pos_now = { y,x };
 		SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
 		std::cout << '@';
+		appearanceFood(); 
 		break;
 
 	case 'r'://RIGHT
@@ -177,6 +196,7 @@ void setPosition(const char direction) {
 		pos_now = { y,x };
 		SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
 		std::cout << '@';
+		appearanceFood();
 		break;
 
 	default:
