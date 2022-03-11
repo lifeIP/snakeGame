@@ -7,10 +7,13 @@ void ñreate_a_field(int width_enter, int height_enter);
 void is_end();
 void render_pos();
 
-std::vector <double> part_position;
+
+std::vector <short> part_position_x = { };
+std::vector <short> part_position_y = { };
 
 int width;
 int height;
+short size_snake = 15;
 short x = 10, y = 20;
 bool endGame = false;
 char pos = 'r';
@@ -38,12 +41,24 @@ void root_s()
 		}
 		else i_switch = 0;
 		directionVector(i_switch);
-		render_pos();
+
 	}
 }
 
 void render_pos() {
-	
+	if (part_position_x.size() > size_snake) {
+		short ix, iy, x, y;
+		ix = part_position_x.size() - 1;
+		iy = part_position_y.size() - 1;
+		x = part_position_x[ix];
+		y = part_position_y[iy];
+		pos_now = { x, y };
+		SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
+		std::cout << ' ';
+		part_position_x.pop_back();
+		part_position_y.pop_back();
+
+	}
 }
 
 void root_t() {
@@ -97,6 +112,9 @@ void setPosition(const char direction) {
 			x--;
 			endGame = true;
 		}
+		part_position_y.insert(part_position_y.begin(), x);
+		part_position_x.insert(part_position_x.begin(), y);
+		render_pos();
 		pos_now = { y,x };
 		SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
 		std::cout << '@';
@@ -111,6 +129,9 @@ void setPosition(const char direction) {
 			x++;
 			endGame = true;
 		}
+		part_position_y.insert(part_position_y.begin(), x);
+		part_position_x.insert(part_position_x.begin(), y);
+		render_pos();
 		pos_now = { y,x };
 		SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
 		std::cout << '@';
@@ -125,6 +146,9 @@ void setPosition(const char direction) {
 			y--;
 			endGame = true;
 		}
+		part_position_y.insert(part_position_y.begin(), x);
+		part_position_x.insert(part_position_x.begin(), y);
+		render_pos();
 		pos_now = { y,x };
 		SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
 		std::cout << '@';
@@ -139,6 +163,9 @@ void setPosition(const char direction) {
 			y++;
 			endGame = true;
 		}
+		part_position_y.insert(part_position_y.begin(), x);
+		part_position_x.insert(part_position_x.begin(), y);
+		render_pos();
 		pos_now = { y,x };
 		SetConsoleCursorPosition(::GetStdHandle(STD_OUTPUT_HANDLE), pos_now);
 		std::cout << '@';
