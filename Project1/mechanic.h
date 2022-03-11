@@ -13,7 +13,7 @@ std::vector <short> part_position_y = { };
 
 int width;
 int height;
-short size_snake = 120;
+short size_snake = 5;
 short x = 10, y = 20;
 bool endGame = false;
 char pos = 'r';
@@ -83,21 +83,25 @@ void directionVector(int direction) {
 	case 72://UP
 		if (pos != 'd') {
 			pos = 'u';
+			Sleep(100);
 		}
 		break;
 	case 80://DOWN
 		if (pos != 'u') {
 			pos = 'd';
+			Sleep(100);
 		}
 		break;
 	case 75://LEFT
 		if (pos != 'r') {
 			pos = 'l';
+			Sleep(100);
 		}
 		break;
 	case 77://RIGHT
 		if (pos != 'l') {
 			pos = 'r';
+			Sleep(100);
 		}
 		break;
 	default:
@@ -128,6 +132,7 @@ void setPosition(const char direction) {
 	switch (direction)
 	{
 	case 'u'://UP
+		
 		if (x > 1) {
 			x--;
 
@@ -146,6 +151,7 @@ void setPosition(const char direction) {
 		break;
 
 	case 'd'://DOWN
+		
 		if (x < height) {
 			x++;
 
@@ -166,7 +172,6 @@ void setPosition(const char direction) {
 	case 'l'://LEFT
 		if (y > 1) {
 			y--;
-
 		}
 		else {
 			y--;
