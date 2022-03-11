@@ -5,11 +5,12 @@ void directionVector(int direction);
 void setPosition(const char direction);
 void ñreate_a_field(int width_enter, int height_enter);
 void is_end();
+void render_pos();
 
 std::vector <double> part_position;
+
 int width;
 int height;
-bool** field;
 short x = 10, y = 20;
 bool endGame = false;
 char pos = 'r';
@@ -18,7 +19,6 @@ char pos = 'r';
 COORD pos_now = { y,x };
 
 void is_end() {
-	while(!endGame){}
 	short x = 10, y = 10;
 	pos_now = { x, y };
 	std::string st1{ "This is the end of the snake world :(" };
@@ -38,9 +38,14 @@ void root_s()
 		}
 		else i_switch = 0;
 		directionVector(i_switch);
-
+		render_pos();
 	}
 }
+
+void render_pos() {
+	
+}
+
 void root_t() {
 	while (!endGame) {
 		setPosition(pos);
@@ -49,6 +54,7 @@ void root_t() {
 		}
 		else Sleep(100);
 	}
+	is_end();
 }
 
 void directionVector(int direction) {

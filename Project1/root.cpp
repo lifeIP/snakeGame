@@ -22,10 +22,7 @@ int main() {
     ñreate_a_field(50, 26);
     std::thread s(root_s);
     std::thread t(root_t);
-    std::thread r(is_end);
+
     s.join();
     t.join();
-    r.join();
-    
-
 }
