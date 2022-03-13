@@ -7,7 +7,7 @@ void is_end();
 void render_pos();
 void appearanceFood();
 void setFoodPos();
-void timer();
+
 
 std::vector <short> part_position_x = { };
 std::vector <short> part_position_y = { };
@@ -21,6 +21,7 @@ char pos = 'r';
 bool val = false;
 short pos_x, pos_y;
 COORD pos_now = { y,x };
+
 
 void is_end() {
 	short x = 10, y = 10;
@@ -46,6 +47,10 @@ void root_s()
 	}
 }
 
+void oroboros() {
+
+}
+
 void render_pos() {
 	if (part_position_x.size() > size_snake) {
 		short ix, iy, x, y;
@@ -53,6 +58,9 @@ void render_pos() {
 		iy = part_position_y.size() - 1;
 		x = part_position_x[ix];
 		y = part_position_y[iy];
+		//search+
+
+		//search-
 		if (x == pos_x && y == pos_y) {
 			part_position_x.pop_back();
 			part_position_y.pop_back();
